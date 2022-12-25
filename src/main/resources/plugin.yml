@@ -1,0 +1,17 @@
+name: HeartfulCPvP # the plugins name as it should appear in the plugin list /pl
+version: 1.0 # the plugin's version
+author: Nodoka4318
+main: ml.heartfulcpvp.hfcpvp.Plugin
+api-version:
+depend: [ProtocolLib]
+
+commands:
+  autocrystal:
+    description: toggle autocrystal
+    usage: /autocrystal
+  noknockback:
+    description: toggle noknockback
+    usage: /noknockback
+  noslow:
+    description: toggle noslow
+    usage: /noslow
