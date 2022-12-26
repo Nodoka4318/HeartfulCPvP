@@ -19,9 +19,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class PlayerInteractEventListener implements Listener {
+    private AutoCrystalModule mod;
+
+    public PlayerInteractEventListener(AutoCrystalModule mod) {
+        this.mod = mod;
+    }
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent e) {
-        // TODO: PlayerData参照
+        if (!mod.getPlayerData().isEnabled(e.getPlayer()))
+            return;
+
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             var block = Objects.requireNonNull(e.getClickedBlock()).getType();
             if (!(block == Material.OBSIDIAN || block == Material.BEDROCK))
