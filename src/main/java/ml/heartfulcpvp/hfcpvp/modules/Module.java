@@ -34,8 +34,17 @@ public abstract class Module {
         Bukkit.getPluginCommand(commandLabel).setExecutor(Module.this::onCommand);
     }
 
-    public abstract void toggle(Player player);
+    public void toggle(Player player) {
+        if (playerData.isEnabled(player)) {
+            playerData.setEnabled(player, false);
+            Plugin.sendInfoMessage(player, "Disabled " + modName + ".");
+        } else {
+            playerData.setEnabled(player, true);
+            Plugin.sendInfoMessage(player, "Enabled " + modName + ".");
+        }
+    }
 
+    // こいつも基底クラスで実装しちゃってもいいかも
     public abstract boolean onCommand(CommandSender sender, Command cmd, String label, String[] args);
 
     public void registerListener(Listener listener) {

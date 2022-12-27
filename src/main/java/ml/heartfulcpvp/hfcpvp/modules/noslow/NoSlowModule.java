@@ -1,17 +1,14 @@
-package ml.heartfulcpvp.hfcpvp.modules.autocrystal;
+package ml.heartfulcpvp.hfcpvp.modules.noslow;
 
-import ml.heartfulcpvp.hfcpvp.Plugin;
 import ml.heartfulcpvp.hfcpvp.modules.Module;
 import ml.heartfulcpvp.hfcpvp.playerdata.PlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.IOException;
-
-public class AutoCrystalModule extends Module {
-    public AutoCrystalModule() {
-        super("AutoCrystal", "autocrystal", new PlayerData("autocrystal"));
+public class NoSlowModule extends Module {
+    public NoSlowModule() {
+        super("NoSlow", "noslow", new PlayerData("noslow"));
 
         registerListener(new PlayerInteractEventListener(this));
     }
