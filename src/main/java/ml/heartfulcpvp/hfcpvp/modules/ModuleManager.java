@@ -2,6 +2,7 @@ package ml.heartfulcpvp.hfcpvp.modules;
 
 import ml.heartfulcpvp.hfcpvp.LoggerHolder;
 import ml.heartfulcpvp.hfcpvp.modules.autocrystal.AutoCrystalModule;
+import ml.heartfulcpvp.hfcpvp.modules.fullbright.FullBrightModule;
 import ml.heartfulcpvp.hfcpvp.modules.noknockback.NoKnockbackModule;
 import ml.heartfulcpvp.hfcpvp.modules.noslow.NoSlowModule;
 
@@ -17,6 +18,7 @@ public class ModuleManager {
         modules.add(new AutoCrystalModule());
         modules.add(new NoKnockbackModule());
         modules.add(new NoSlowModule());
+        modules.add(new FullBrightModule());
     }
 
     public void writePlayerData() {
