@@ -2,11 +2,13 @@ package ml.heartfulcpvp.hfcpvp;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import ml.heartfulcpvp.hfcpvp.features.PlayerFixer;
 import ml.heartfulcpvp.hfcpvp.modules.ModuleManager;
 import ml.heartfulcpvp.hfcpvp.playerdata.PlayerDataUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.SimplePluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,6 +28,8 @@ public class Plugin extends JavaPlugin {
         protocolManager = ProtocolLibrary.getProtocolManager();
         setupSimpleCommandMap();
         PlayerDataUtils.createDirectory();
+
+        getServer().getPluginManager().registerEvents(new PlayerFixer(), this);
 
         moduleManager = new ModuleManager();
     }
