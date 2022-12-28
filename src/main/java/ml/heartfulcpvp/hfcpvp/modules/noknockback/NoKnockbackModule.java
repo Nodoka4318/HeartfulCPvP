@@ -12,6 +12,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class NoKnockbackModule extends Module {
     public NoKnockbackModule() {
         super("NoKnock-back", "noknockback", new PlayerData("noknockback"));
@@ -69,5 +72,10 @@ public class NoKnockbackModule extends Module {
         }
         sender.sendMessage("This command is only allowed for players!");
         return false;
+    }
+
+    @Override
+    public List<String> getCommandAliases() {
+        return Arrays.stream(new String[] { "velocity" }).toList();
     }
 }

@@ -8,11 +8,20 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class FullBrightModule extends Module {
     public FullBrightModule() {
         super("FullBright", "fullbright", new PlayerData("fullbright"));
 
         registerListener(new PlayerJoinEventListener(this));
+        registerListener(new PlayerMoveEventListener(this));
+    }
+
+    @Override
+    public List<String> getCommandAliases() {
+        return Arrays.stream(new String[] { "nightvision", "nv" }).toList();
     }
 
     @Override
@@ -21,11 +30,11 @@ public class FullBrightModule extends Module {
             toggle(player);
 
             if (playerData.isEnabled(player)) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 1, false, false));
+            } else {
                 if (player.hasPotionEffect(PotionEffectType.NIGHT_VISION)) {
                     player.removePotionEffect(PotionEffectType.NIGHT_VISION);
                 }
-            } else {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 1, false, false));
             }
             return true;
         }

@@ -4,15 +4,17 @@ import com.comphenix.protocol.events.PacketListener;
 import ml.heartfulcpvp.hfcpvp.LoggerHolder;
 import ml.heartfulcpvp.hfcpvp.Plugin;
 import ml.heartfulcpvp.hfcpvp.playerdata.PlayerData;
-import ml.heartfulcpvp.hfcpvp.playerdata.PlayerDataElement;
 import org.bukkit.Bukkit;
+import org.bukkit.Server;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class Module {
     protected String modName;
@@ -31,7 +33,16 @@ public abstract class Module {
             LoggerHolder.getLogger().severe("<" + modName + "> An error occurred while loading player data.");
             e.printStackTrace();
         }
-        Bukkit.getPluginCommand(commandLabel).setExecutor(Module.this::onCommand);
+        // Bukkit.getPluginCommand(commandLabel).setExecutor(Module.this::onCommand);
+        registerCommand();
+    }
+
+    public String getCommandDescription() {
+        return "toggle " + modName;
+    }
+
+    public List<String> getCommandAliases() {
+        return Arrays.stream(new String[] { }).toList();
     }
 
     public void toggle(Player player) {
@@ -47,7 +58,7 @@ public abstract class Module {
     // こいつも基底クラスで実装しちゃってもいいかも
     public abstract boolean onCommand(CommandSender sender, Command cmd, String label, String[] args);
 
-    public void registerListener(Listener listener) {
+    protected void registerListener(Listener listener) {
         LoggerHolder.getLogger().info("Registering listener, " +  listener.getClass().getName() + " for " + modName);
         Bukkit.getServer().getPluginManager().registerEvents(
                 listener,
@@ -55,12 +66,27 @@ public abstract class Module {
         );
     }
 
-    public void registerPacketListener(PacketListener listener) {
+    protected void registerPacketListener(PacketListener listener) {
         LoggerHolder.getLogger().info("Registering packet listener, " +  listener.getClass().getName() + " for " + modName);
         Plugin.getProtocolManager().addPacketListener(listener);
     }
 
     public PlayerData getPlayerData() {
         return playerData;
+    }
+
+    protected void registerCommand() {
+        Command command = new Command(commandLabel) {
+            @Override
+            public boolean execute(CommandSender sender, String label, String[] args) {
+                return Module.this.onCommand(sender, this, label, args);
+            }
+        };
+        command.setDescription(getCommandDescription());
+        if (getCommandAliases().size() >= 1) {
+            command.setAliases(getCommandAliases());
+        }
+        LoggerHolder.getLogger().info("Registering command, " +  commandLabel + " for " + modName);
+        Plugin.getCommandMap().register(commandLabel, command);
     }
 }

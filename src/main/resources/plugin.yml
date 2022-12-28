@@ -5,19 +5,19 @@ main: ml.heartfulcpvp.hfcpvp.Plugin
 api-version:
 depend: [ProtocolLib]
 
-commands:
-  autocrystal:
-    description: toggle autocrystal
-    aliases: [ac, ca]
-    usage: /autocrystal
-  noknockback:
-    description: toggle noknockback
-    aliases: [velocity]
-    usage: /noknockback
-  noslow:
-    description: toggle noslow
-    usage: /noslow
-  fullbright:
-    description: toggle fullbright
-    aliases: [nightvision, nv]
-    usage: /fullbright
+# commands:
+#   autocrystal:
+#     description: toggle autocrystal
+#     aliases: [ac, ca]
+#     usage: /autocrystal
+#   noknockback:
+#     description: toggle noknockback
+#     aliases: [velocity]
+#     usage: /noknockback
+#   noslow:
+#     description: toggle noslow
+#     usage: /noslow
+#   fullbright:
+#     description: toggle fullbright
+#     aliases: [nightvision, nv]
+#     usage: /fullbright

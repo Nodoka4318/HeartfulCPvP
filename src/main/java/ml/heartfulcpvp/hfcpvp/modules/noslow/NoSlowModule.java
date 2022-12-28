@@ -10,11 +10,12 @@ public class NoSlowModule extends Module {
     public NoSlowModule() {
         super("NoSlow", "noslow", new PlayerData("noslow"));
 
-        registerListener(new PlayerInteractEventListener(this));
+        // registerListener(new PlayerInteractEventListener(this));
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        /*
         if (sender instanceof Player) {
             var player = (Player) sender;
             toggle(player);
@@ -22,5 +23,9 @@ public class NoSlowModule extends Module {
         }
         sender.sendMessage("This command is only allowed for players!");
         return false;
+
+         */
+        sender.sendMessage("this command is not implemented yet");
+        return true;
     }
 }
