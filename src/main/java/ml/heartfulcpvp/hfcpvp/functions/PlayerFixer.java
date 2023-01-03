@@ -1,4 +1,4 @@
-package ml.heartfulcpvp.hfcpvp.features;
+package ml.heartfulcpvp.hfcpvp.functions;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
