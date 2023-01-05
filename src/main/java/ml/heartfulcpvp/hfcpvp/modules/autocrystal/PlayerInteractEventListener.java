@@ -7,6 +7,7 @@ import ml.heartfulcpvp.hfcpvp.Plugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -41,23 +42,13 @@ public class PlayerInteractEventListener implements Listener {
                     if (entity.getType() == EntityType.ENDER_CRYSTAL) {
                         var top = entity.getLocation().getBlock().getRelative(BlockFace.UP);
                         if (top.getType() != Material.AIR) {
-                            entity.remove();
-                            e.setCancelled(true);
+                            // ml.heartfulcpvp.hfcpvp.functions.crystalfixer.CrystalFixer
                             return;
                         }
 
                         var below = entity.getLocation().getBlock().getRelative(BlockFace.DOWN);
                         if (e.getClickedBlock().equals(below)) {
-
-                            PacketContainer packet = new PacketContainer(PacketType.Play.Client.USE_ENTITY);
-
-                            packet.getEntityUseActions().write(0, EnumWrappers.EntityUseAction.ATTACK);
-                            packet.getModifier().write(0, entity.getEntityId());
-                            try {
-                                Plugin.getProtocolManager().recieveClientPacket(e.getPlayer(), packet);
-                            } catch (IllegalAccessException | InvocationTargetException ex) {
-                                ex.printStackTrace();
-                            }
+                            AutoCrystalModule.breakCrystal(e.getPlayer(), (EnderCrystal) entity);
                         }
                     }
                 }
