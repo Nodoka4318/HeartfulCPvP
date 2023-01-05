@@ -1,7 +1,10 @@
 package ml.heartfulcpvp.hfcpvp.functions.playerfixer;
 
 import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.events.MonitorAdapter;
+import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.events.PacketEvent;
 import ml.heartfulcpvp.hfcpvp.Plugin;
 import ml.heartfulcpvp.hfcpvp.functions.Function;
 import org.bukkit.event.EventHandler;
@@ -17,16 +20,22 @@ public class PlayerFixer extends Function {
         registerListener(new Listener() {
             @EventHandler
             public void onPlayerJoin(PlayerJoinEvent e) {
-                var fakePacket = new PacketContainer(PacketType.Play.Client.ARM_ANIMATION);
-                try {
-                    fakePacket.getIntegers().write(0, 0);
-                } catch (Exception ex) {
-                    getLogger().warning(ex.getLocalizedMessage());
-                } finally {
+                if (e.getPlayer() != null) {
+                    var fakePacket = new PacketContainer(PacketType.Play.Client.ARM_ANIMATION);
                     try {
-                        Plugin.getProtocolManager().recieveClientPacket(e.getPlayer(), fakePacket);
-                    } catch (IllegalAccessException | InvocationTargetException ex) {
-                        ex.printStackTrace();
+                        fakePacket.getIntegers().write(0, 0);
+                    } catch (Exception ex) {
+                        getLogger().warning(ex.getLocalizedMessage());
+                    } finally {
+                        try {
+                            Plugin.getProtocolManager().recieveClientPacket(e.getPlayer(), fakePacket);
+                        } catch (IllegalAccessException | InvocationTargetException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    if (BEPlayer.isBE(e.getPlayer())) {
+                        BEPlayer.fixDisplayName(e.getPlayer());
                     }
                 }
             }
