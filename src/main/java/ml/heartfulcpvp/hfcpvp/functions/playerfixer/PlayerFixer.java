@@ -5,6 +5,7 @@ import com.comphenix.protocol.events.MonitorAdapter;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
+import com.comphenix.protocol.injector.server.TemporaryPlayer;
 import ml.heartfulcpvp.hfcpvp.Plugin;
 import ml.heartfulcpvp.hfcpvp.functions.Function;
 import org.bukkit.event.EventHandler;
@@ -33,12 +34,22 @@ public class PlayerFixer extends Function {
                             ex.printStackTrace();
                         }
                     }
+                }
+            }
+        });
 
+        /*
+        registerListener(new Listener() {
+            @EventHandler
+            public void onPLayerJoin(PlayerJoinEvent e) {
+                if (!(e.getPlayer() == null || e.getPlayer() instanceof TemporaryPlayer)) {
                     if (BEPlayer.isBE(e.getPlayer())) {
                         BEPlayer.fixDisplayName(e.getPlayer());
                     }
                 }
             }
         });
+
+         */
     }
 }

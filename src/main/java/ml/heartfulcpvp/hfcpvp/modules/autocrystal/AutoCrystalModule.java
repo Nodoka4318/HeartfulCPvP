@@ -19,7 +19,7 @@ public class AutoCrystalModule extends Module {
     public AutoCrystalModule() {
         super("AutoCrystal", "autocrystal", new PlayerData("autocrystal"));
 
-        // registerListener(new PlayerInteractEventListener(this));
+        registerListener(new PlayerInteractEventListener(this));
     }
 
     @Override
