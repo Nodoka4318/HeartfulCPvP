@@ -1,10 +1,12 @@
 package ml.heartfulcpvp.hfcpvp.playerdata;
 
 import ml.heartfulcpvp.hfcpvp.HfcpvpException;
+import ml.heartfulcpvp.hfcpvp.LoggerHolder;
 
 import java.io.InvalidObjectException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class PlayerDataElement {
     private Map<String, String> data;
@@ -41,7 +43,8 @@ public class PlayerDataElement {
 
     public static PlayerDataElement fromString(String str) {
         var pars = str.split(":");
-        var elem = new PlayerDataElement(pars[0], Boolean.getBoolean(pars[1])); // TODO: getBooleanでbool値が取得できてない？
+        var elem = new PlayerDataElement(pars[0], Objects.equals(pars[1], "true"));
+
         for (int i = 2; i < pars.length; i++) {
             var vals = pars[i].split("\\$");
             elem.saveData(vals[0], vals[1]);
