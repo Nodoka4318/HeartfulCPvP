@@ -41,7 +41,7 @@ public class PlayerDataElement {
 
     public static PlayerDataElement fromString(String str) {
         var pars = str.split(":");
-        var elem = new PlayerDataElement(pars[0], Boolean.getBoolean(pars[1]));
+        var elem = new PlayerDataElement(pars[0], Boolean.getBoolean(pars[1])); // TODO: getBooleanでbool値が取得できてない？
         for (int i = 2; i < pars.length; i++) {
             var vals = pars[i].split("\\$");
             elem.saveData(vals[0], vals[1]);
