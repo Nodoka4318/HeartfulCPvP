@@ -5,6 +5,7 @@ import ml.heartfulcpvp.hfcpvp.modules.autocrystal.AutoCrystalModule;
 import ml.heartfulcpvp.hfcpvp.modules.fullbright.FullBrightModule;
 import ml.heartfulcpvp.hfcpvp.modules.noknockback.NoKnockbackModule;
 import ml.heartfulcpvp.hfcpvp.modules.noslow.NoSlowModule;
+import ml.heartfulcpvp.hfcpvp.modules.surround.SurroundModule;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class ModuleManager {
         modules.add(new NoKnockbackModule());
         modules.add(new NoSlowModule());
         modules.add(new FullBrightModule());
+        modules.add(new SurroundModule());
     }
 
     public void writePlayerData() {

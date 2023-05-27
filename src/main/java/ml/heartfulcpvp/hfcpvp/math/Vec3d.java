@@ -2,6 +2,7 @@ package ml.heartfulcpvp.hfcpvp.math;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 
 import java.util.Vector;
 
@@ -34,6 +35,12 @@ public class Vec3d {
         this.z = loc.getZ();
     }
 
+    public Vec3d(Block block) {
+        this.x = block.getX();
+        this.y = block.getY();
+        this.z = block.getZ();
+    }
+
     public Location toLocation(World world) {
         return new Location(world, x, y, z);
     }
@@ -45,8 +52,9 @@ public class Vec3d {
     }
 
     public static Vec3d addVector(Vec3d a, Vec3d b) {
-        a.add(b);
-        return a;
+        var na = new Vec3d(a.x, a.y, a.z);
+        na.add(b); // a.add(b)だとaが改変されるぽい
+        return na;
     }
 
     public static double innerProduct(Vec3d a, Vec3d b) {
