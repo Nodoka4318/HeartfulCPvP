@@ -34,6 +34,7 @@ public class CrystalFixer extends Function {
                     try {
                         amountMainhand = player.getItemInHand().getAmount();
                         amountOffhand = player.getInventory().getItemInOffHand().getAmount();
+                        // debug msg
                         e.getPlayer().sendMessage(amountMainhand + " " + amountOffhand);
                     } catch (Exception ex) {
                         ex.printStackTrace();

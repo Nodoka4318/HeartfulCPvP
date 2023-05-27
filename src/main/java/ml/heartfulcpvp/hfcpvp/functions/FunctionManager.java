@@ -13,7 +13,7 @@ public class FunctionManager {
         functions = new ArrayList<>();
 
         functions.add(new PlayerFixer());
-        functions.add(new CrystalFixer());
+        // functions.add(new CrystalFixer());
     }
 
     public Function getFunction(Class functionClass) throws HfcpvpException {
