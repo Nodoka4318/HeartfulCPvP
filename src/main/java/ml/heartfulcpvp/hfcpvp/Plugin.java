@@ -20,6 +20,7 @@ public class Plugin extends JavaPlugin {
     private static ModuleManager moduleManager;
     private static FunctionManager functionManager;
     private static SimpleCommandMap commandMap;
+    private static Plugin instanse;
 
     @Override
     public void onEnable() {
@@ -30,6 +31,7 @@ public class Plugin extends JavaPlugin {
 
         moduleManager = new ModuleManager();
         functionManager = new FunctionManager();
+        instanse = this;
     }
 
     @Override
@@ -67,5 +69,9 @@ public class Plugin extends JavaPlugin {
 
     public static SimpleCommandMap getCommandMap() {
         return commandMap;
+    }
+
+    public static Plugin getInstance() {
+        return instanse;
     }
 }
