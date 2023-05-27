@@ -15,6 +15,7 @@ import java.util.Vector;
 
 public class PlayerToggleSneakEventListener implements Listener {
     private SurroundModule mod;
+    private final int HIGHEST = 40;
 
     public PlayerToggleSneakEventListener(SurroundModule mod) {
         this.mod = mod;
@@ -23,7 +24,7 @@ public class PlayerToggleSneakEventListener implements Listener {
     @EventHandler
     public void onPlayerToggleSneak(PlayerToggleSneakEvent event) {
         var player = event.getPlayer();
-        if (player.isSneaking()) {
+        if (player.getLocation().getY() >= HIGHEST || player.isSneaking()) {
             return; // すでにスニーク状態の場合
         }
 
@@ -36,11 +37,8 @@ public class PlayerToggleSneakEventListener implements Listener {
         }
 
         var playerBlockPos = getPlayerBlockPos(player);
-        var blockPlayerOn = player.getWorld().getBlockAt(
-                (int) Math.floor(playerBlockPos.getX()),
-                (int) Math.floor(playerBlockPos.getY()) - 1,
-                (int) Math.floor(playerBlockPos.getX())
-        );
+        var blockPlayerOnPosVec = new Vec3d(playerBlockPos.getX(), playerBlockPos.getY() - 1, playerBlockPos.getZ());
+        var blockPlayerOn = player.getWorld().getBlockAt(blockPlayerOnPosVec.toLocation(player.getWorld()));
 
         if (blockPlayerOn.getType() == Material.AIR) {
             return; // プレイヤーがブロックに乗ってない
@@ -64,15 +62,13 @@ public class PlayerToggleSneakEventListener implements Listener {
             var placePosVec = Vec3d.addVector(playerBlockPosVec, relVec);
             var placePosBlock = player.getWorld().getBlockAt(placePosVec.toLocation(player.getWorld()));
 
-            if (placePosBlock.getType() != Material.AIR) {
-                continue; // すでにそこにブロックある
-            } else {
+            if (placePosBlock.getType() == Material.AIR) {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
                         SurroundModule.placeBlock(player, placePosVec);
                     }
-                }.runTaskLater(Plugin.getInstance(), 2 * i);
+                }.runTaskLater(Plugin.getInstance(), i);
             }
         }
     }

@@ -9,8 +9,10 @@ import ml.heartfulcpvp.hfcpvp.Plugin;
 import ml.heartfulcpvp.hfcpvp.math.Vec3d;
 import ml.heartfulcpvp.hfcpvp.modules.Module;
 import ml.heartfulcpvp.hfcpvp.playerdata.PlayerData;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -61,6 +63,9 @@ public class SurroundModule extends Module {
             player.getInventory().getItemInMainHand().setAmount(itemStack.getAmount() - 1);
         }
 
-        LoggerHolder.getLogger().warning("placed at " + pos.getX() + " " + pos.getY() + " " + pos.getZ());
+        for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+            p.playSound(player.getLocation(), Sound.BLOCK_STONE_PLACE, 1.0f, 1.0f);
+        }
+        // LoggerHolder.getLogger().warning("placed at " + pos.getX() + " " + pos.getY() + " " + pos.getZ());
     }
 }
