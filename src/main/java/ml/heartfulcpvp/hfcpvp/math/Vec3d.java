@@ -10,6 +10,18 @@ public class Vec3d {
     private double y;
     private double z;
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
     public Vec3d(double x, double y, double z) {
         this.x = x;
         this.y = y;
