@@ -56,9 +56,8 @@ public class PlayerToggleSneakEventListener implements Listener {
                 new Vec3d(0, 0, -1),
         };
 
-
-        for (int i = 0; i < relativePosVecs.length; i++) {
-            var relVec = relativePosVecs[i];
+        int i = 0;
+        for (var relVec : relativePosVecs) {
             var placePosVec = Vec3d.addVector(playerBlockPosVec, relVec);
             var placePosBlock = player.getWorld().getBlockAt(placePosVec.toLocation(player.getWorld()));
 
@@ -69,6 +68,8 @@ public class PlayerToggleSneakEventListener implements Listener {
                         SurroundModule.placeBlock(player, placePosVec);
                     }
                 }.runTaskLater(Plugin.getInstance(), i);
+
+                i++;
             }
         }
     }
