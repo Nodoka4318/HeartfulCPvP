@@ -14,8 +14,7 @@ public class ParticleAnimationPacketListener extends PacketAdapter {
     public ParticleAnimationPacketListener(NoRenderModule mod) {
         super(
                 Plugin.getPlugin(),
-                ListenerPriority.NORMAL,
-                PacketType.Play.Server.WORLD_PARTICLES
+                ListenerPriority.NORMAL
         );
 
         this.mod = mod;
@@ -32,6 +31,10 @@ public class ParticleAnimationPacketListener extends PacketAdapter {
         }
 
         if (e.getPacketType() == PacketType.Play.Server.WORLD_PARTICLES) {
+            e.setCancelled(true);
+        }
+
+        if (e.getPacketType() == PacketType.Play.Server.EXPLOSION) {
             e.setCancelled(true);
         }
     }

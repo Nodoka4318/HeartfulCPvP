@@ -1,5 +1,11 @@
 package ml.heartfulcpvp.hfcpvp.modules.norender;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.events.ListenerPriority;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.events.PacketEvent;
+import ml.heartfulcpvp.hfcpvp.Plugin;
 import ml.heartfulcpvp.hfcpvp.modules.Module;
 import ml.heartfulcpvp.hfcpvp.modules.autocrystal.PlayerInteractEventListener;
 import ml.heartfulcpvp.hfcpvp.playerdata.PlayerData;
