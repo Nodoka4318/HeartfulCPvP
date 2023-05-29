@@ -56,6 +56,17 @@ public class PlayerToggleSneakEventListener implements Listener {
                 new Vec3d(0, 0, -1),
         };
 
+        var holeLoc = new Location(
+                player.getWorld(),
+                playerBlockPosVec.getX(),
+                playerBlockPosVec.getY(),
+                playerBlockPosVec.getZ(),
+                player.getLocation().getYaw(),
+                player.getLocation().getPitch()
+        );
+
+        player.teleport(holeLoc);
+
         int i = 0;
         for (var relVec : relativePosVecs) {
             var placePosVec = Vec3d.addVector(playerBlockPosVec, relVec);
