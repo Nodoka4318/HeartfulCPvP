@@ -28,7 +28,7 @@ public class SurroundModule extends Module {
         return false;
     }
 
-    public static void placeObisidan(Player player, Vec3d pos) {
+    public static void placeObsidian(Player player, Vec3d pos) {
         // ref. https://wiki.vg/Protocol#Use_Item_On
         /*
         var packet = new PacketContainer(PacketType.Play.Client.USE_ITEM);
@@ -53,6 +53,18 @@ public class SurroundModule extends Module {
             }
         }
 
+        for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+            var pVec = new Vec3d(p.getLocation());
+
+            if (pVec.equals(pos)) {
+                return; // そこにプレイヤーがいる // TODO: not working
+            }
+
+            if (p.getWorld() == player.getWorld()) {
+                p.playSound(player.getLocation(), Sound.BLOCK_STONE_PLACE, 1.0f, 1.0f); // 先にならすと違和感ある？
+            }
+        }
+
         var block = player.getWorld().getBlockAt(pos.toLocation(player.getWorld()));
         block.setType(Material.OBSIDIAN);
 
@@ -64,10 +76,6 @@ public class SurroundModule extends Module {
                 // offhand
                 player.getInventory().getItemInOffHand().setAmount(offStack.getAmount() - 1);
             }
-        }
-
-        for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-            p.playSound(player.getLocation(), Sound.BLOCK_STONE_PLACE, 1.0f, 1.0f);
         }
         // LoggerHolder.getLogger().warning("placed at " + pos.getX() + " " + pos.getY() + " " + pos.getZ());
     }

@@ -75,7 +75,7 @@ public class PlayerToggleSneakEventListener implements Listener {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        SurroundModule.placeObisidan(player, placePosVec);
+                        SurroundModule.placeObsidian(player, placePosVec);
                     }
                 }.runTaskLater(Plugin.getInstance(), i);
 

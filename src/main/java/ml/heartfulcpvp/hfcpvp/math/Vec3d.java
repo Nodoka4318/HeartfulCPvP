@@ -51,6 +51,10 @@ public class Vec3d {
         z += vec.z;
     }
 
+    public boolean equals(Vec3d vec) {
+        return x == vec.x && y == vec.y && z == vec.z;
+    }
+
     public static Vec3d addVector(Vec3d a, Vec3d b) {
         var na = new Vec3d(a.x, a.y, a.z);
         na.add(b); // a.add(b)だとaが改変されるぽい
