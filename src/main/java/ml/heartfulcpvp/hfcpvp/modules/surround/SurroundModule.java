@@ -54,10 +54,14 @@ public class SurroundModule extends Module {
         }
 
         for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-            var pVec = new Vec3d(p.getLocation());
+            var x = Math.floor(p.getLocation().getX()) + 0.5;
+            var y = Math.floor(p.getLocation().getY());
+            var z = Math.floor(p.getLocation().getZ()) + 0.5;
+
+            var pVec = new Vec3d(x, y, z);
 
             if (pVec.equals(pos)) {
-                return; // そこにプレイヤーがいる // TODO: not working
+                return; // そこにプレイヤーがいる
             }
 
             if (p.getWorld() == player.getWorld()) {
