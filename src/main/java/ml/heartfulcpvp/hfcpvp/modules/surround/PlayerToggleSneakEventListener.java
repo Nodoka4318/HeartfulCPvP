@@ -1,6 +1,5 @@
 package ml.heartfulcpvp.hfcpvp.modules.surround;
 
-import com.comphenix.protocol.wrappers.BlockPosition;
 import ml.heartfulcpvp.hfcpvp.Plugin;
 import ml.heartfulcpvp.hfcpvp.math.Vec3d;
 import org.bukkit.Location;
@@ -10,8 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.Vector;
 
 public class PlayerToggleSneakEventListener implements Listener {
     private SurroundModule mod;
@@ -33,7 +30,9 @@ public class PlayerToggleSneakEventListener implements Listener {
         }
 
         if (player.getInventory().getItemInMainHand().getType() != Material.OBSIDIAN) {
-            return; // 黒曜石がmainhandにない
+            if (player.getInventory().getItemInOffHand().getType() != Material.OBSIDIAN) {
+                return; // 黒曜石を持ってない
+            }
         }
 
         var playerBlockPos = getPlayerBlockPos(player);
@@ -76,7 +75,7 @@ public class PlayerToggleSneakEventListener implements Listener {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        SurroundModule.placeBlock(player, placePosVec);
+                        SurroundModule.placeObisidan(player, placePosVec);
                     }
                 }.runTaskLater(Plugin.getInstance(), i);
 
