@@ -2,14 +2,21 @@ package ml.heartfulcpvp.hfcpvp.modules.surround;
 
 import ml.heartfulcpvp.hfcpvp.math.Vec3d;
 import ml.heartfulcpvp.hfcpvp.modules.Module;
+import ml.heartfulcpvp.hfcpvp.modules.autocrystal.AutoCrystalModule;
 import ml.heartfulcpvp.hfcpvp.playerdata.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.BlockFace;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EnderCrystal;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+
+import java.util.List;
 
 public class SurroundModule extends Module {
     public SurroundModule() {
@@ -53,19 +60,19 @@ public class SurroundModule extends Module {
             }
         }
 
-        for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-            var x = Math.floor(p.getLocation().getX()) + 0.5;
-            var y = Math.floor(p.getLocation().getY());
-            var z = Math.floor(p.getLocation().getZ()) + 0.5;
+        List<Entity> entities = player.getNearbyEntities(2, 2, 2);
 
-            var pVec = new Vec3d(x, y, z);
+        for (Entity entity : entities) {
+            if (entity.getType() == EntityType.ENDER_CRYSTAL || entity.getType() == EntityType.PLAYER) {
+                var x = Math.floor(entity.getLocation().getX()) + 0.5;
+                var y = Math.floor(entity.getLocation().getY());
+                var z = Math.floor(entity.getLocation().getZ()) + 0.5;
 
-            if (pVec.equals(pos)) {
-                return; // そこにプレイヤーがいる
-            }
+                var pVec = new Vec3d(x, y, z);
 
-            if (p.getWorld() == player.getWorld()) {
-                p.playSound(player.getLocation(), Sound.BLOCK_STONE_PLACE, 1.0f, 1.0f); // 先にならすと違和感ある？
+                if (pVec.equals(pos)) {
+                    return; // そこにプレイヤーまたはクリスタルがある
+                }
             }
         }
 
@@ -79,6 +86,12 @@ public class SurroundModule extends Module {
             } else {
                 // offhand
                 player.getInventory().getItemInOffHand().setAmount(offStack.getAmount() - 1);
+            }
+        }
+
+        for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+            if (p.getWorld() == player.getWorld()) {
+                p.playSound(player.getLocation(), Sound.BLOCK_STONE_PLACE, 1.0f, 1.0f); // 先にならすと違和感ある？
             }
         }
         // LoggerHolder.getLogger().warning("placed at " + pos.getX() + " " + pos.getY() + " " + pos.getZ());
