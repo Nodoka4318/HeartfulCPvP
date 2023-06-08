@@ -2,7 +2,6 @@ package ml.heartfulcpvp.hfcpvp.functions;
 
 import ml.heartfulcpvp.hfcpvp.HfcpvpException;
 import ml.heartfulcpvp.hfcpvp.functions.crystalfixer.CrystalFixer;
-import ml.heartfulcpvp.hfcpvp.functions.multitask.MultiTaskFixer;
 import ml.heartfulcpvp.hfcpvp.functions.playerfixer.PlayerFixer;
 
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ public class FunctionManager {
 
         functions.add(new PlayerFixer());
         // functions.add(new CrystalFixer());
-        functions.add(new MultiTaskFixer());
     }
 
     public Function getFunction(Class functionClass) throws HfcpvpException {
