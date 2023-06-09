@@ -1,4 +1,4 @@
-package ml.heartfulcpvp.hfcpvp;
+package ml.heartfulcpvp.hfcpvp.exceptions;
 
 public class HfcpvpException extends Exception {
     public HfcpvpException(String message) {

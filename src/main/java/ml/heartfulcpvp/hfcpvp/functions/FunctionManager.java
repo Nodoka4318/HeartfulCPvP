@@ -1,7 +1,6 @@
 package ml.heartfulcpvp.hfcpvp.functions;
 
-import ml.heartfulcpvp.hfcpvp.HfcpvpException;
-import ml.heartfulcpvp.hfcpvp.functions.crystalfixer.CrystalFixer;
+import ml.heartfulcpvp.hfcpvp.exceptions.HfcpvpException;
 import ml.heartfulcpvp.hfcpvp.functions.playerfixer.PlayerFixer;
 
 import java.util.ArrayList;

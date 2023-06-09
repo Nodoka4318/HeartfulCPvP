@@ -1,9 +1,7 @@
 package ml.heartfulcpvp.hfcpvp.playerdata;
 
-import ml.heartfulcpvp.hfcpvp.HfcpvpException;
-import ml.heartfulcpvp.hfcpvp.LoggerHolder;
+import ml.heartfulcpvp.hfcpvp.exceptions.HfcpvpException;
 
-import java.io.InvalidObjectException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

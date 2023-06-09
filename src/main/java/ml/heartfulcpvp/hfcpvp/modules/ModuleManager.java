@@ -1,6 +1,7 @@
 package ml.heartfulcpvp.hfcpvp.modules;
 
 import ml.heartfulcpvp.hfcpvp.LoggerHolder;
+import ml.heartfulcpvp.hfcpvp.exceptions.HfcpvpModuleClassNotRegisteredException;
 import ml.heartfulcpvp.hfcpvp.modules.autocrystal.AutoCrystalModule;
 import ml.heartfulcpvp.hfcpvp.modules.fullbright.FullBrightModule;
 import ml.heartfulcpvp.hfcpvp.modules.noknockback.NoKnockbackModule;
@@ -33,5 +34,18 @@ public class ModuleManager {
                 e.printStackTrace();
             }
         });
+    }
+
+    public Module getModule(Class moduleClass) throws HfcpvpModuleClassNotRegisteredException {
+        if (!Module.class.isAssignableFrom(moduleClass)) {
+            throw new HfcpvpModuleClassNotRegisteredException(moduleClass);
+        } else {
+            for (var m : modules) {
+                if (modules.getClass() == moduleClass) {
+                    return m;
+                }
+            }
+        }
+        throw new HfcpvpModuleClassNotRegisteredException(moduleClass);
     }
 }
