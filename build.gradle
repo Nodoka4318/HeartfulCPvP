@@ -1,4 +1,18 @@
+/*
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    }
+
+    dependencies {
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+    }
+}
+*/
+
 plugins {
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
     id 'java'
 }
 
@@ -30,15 +44,33 @@ repositories {
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url = 'https://oss.sonatype.org/content/repositories/central' }
     maven { url "https://repo.dmulloy2.net/repository/public/" }
+    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    maven {
+        url 'https://libraries.minecraft.net/'
+        metadataSources {
+            mavenPom()
+            artifact()
+            ignoreGradleMetadataRedirection()
+        }
+    }
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT'
-    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.8.0";
-
+    implementation 'org.spigotmc:spigot:1.16.5-R0.1-SNAPSHOT'
+    // compileOnly files ('libs/spigot-1.17-R0.1-SNAPSHOT-remapped-mojang.jar')
+    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.8.0"
+    implementation 'org.spongepowered:mixin:0.8.5'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
+
+/*
+apply plugin: "org.spongepowered.mixin"
+
+mixin {
+    config "mixins.heartfulcpvp.json"
+}
+*/
 
 test {
     useJUnitPlatform()

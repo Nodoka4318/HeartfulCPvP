@@ -11,6 +11,8 @@ import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.SimplePluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.spongepowered.asm.mixin.MixinEnvironment;
+import org.spongepowered.asm.mixin.Mixins;
 
 import java.lang.reflect.Field;
 
@@ -21,6 +23,11 @@ public class Plugin extends JavaPlugin {
     private static FunctionManager functionManager;
     private static SimpleCommandMap commandMap;
     private static Plugin instanse;
+
+    @Override
+    public void onLoad() {
+        Mixins.addConfiguration("mixins.heartfulcpvp.json");
+    }
 
     @Override
     public void onEnable() {
@@ -73,5 +80,9 @@ public class Plugin extends JavaPlugin {
 
     public static Plugin getInstance() {
         return instanse;
+    }
+
+    public static ModuleManager getModuleManager() {
+        return moduleManager;
     }
 }

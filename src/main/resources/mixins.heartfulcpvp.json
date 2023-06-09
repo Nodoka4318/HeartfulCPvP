@@ -1,0 +1,7 @@
+{
+  "package": "ml.heartfulcpvp.hfcpvp.mixins",
+  "mixins": [
+    "MixinEntityLiving",
+    "MixinPlayer"
+  ]
+}
