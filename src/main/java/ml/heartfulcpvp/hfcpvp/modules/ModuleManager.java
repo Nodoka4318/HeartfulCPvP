@@ -4,6 +4,7 @@ import ml.heartfulcpvp.hfcpvp.LoggerHolder;
 import ml.heartfulcpvp.hfcpvp.exceptions.HfcpvpModuleClassNotRegisteredException;
 import ml.heartfulcpvp.hfcpvp.modules.autocrystal.AutoCrystalModule;
 import ml.heartfulcpvp.hfcpvp.modules.fullbright.FullBrightModule;
+import ml.heartfulcpvp.hfcpvp.modules.multitask.MultitaskModule;
 import ml.heartfulcpvp.hfcpvp.modules.noknockback.NoKnockbackModule;
 import ml.heartfulcpvp.hfcpvp.modules.noslow.NoSlowModule;
 import ml.heartfulcpvp.hfcpvp.modules.surround.SurroundModule;
@@ -22,6 +23,7 @@ public class ModuleManager {
         modules.add(new NoSlowModule());
         modules.add(new FullBrightModule());
         modules.add(new SurroundModule());
+        modules.add(new MultitaskModule());
     }
 
     public void writePlayerData() {
@@ -41,11 +43,12 @@ public class ModuleManager {
             throw new HfcpvpModuleClassNotRegisteredException(moduleClass);
         } else {
             for (var m : modules) {
-                if (modules.getClass() == moduleClass) {
+                if (m.getClass() == moduleClass) {
                     return m;
                 }
             }
+
+            throw new HfcpvpModuleClassNotRegisteredException(moduleClass);
         }
-        throw new HfcpvpModuleClassNotRegisteredException(moduleClass);
     }
 }

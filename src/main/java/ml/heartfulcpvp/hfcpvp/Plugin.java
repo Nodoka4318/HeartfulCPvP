@@ -2,8 +2,12 @@ package ml.heartfulcpvp.hfcpvp;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import com.dragoncommissions.mixbukkit.MixBukkit;
+import com.dragoncommissions.mixbukkit.addons.AutoMapper;
+import com.dragoncommissions.mixbukkit.api.MixinPlugin;
 import ml.heartfulcpvp.hfcpvp.functions.FunctionManager;
-import ml.heartfulcpvp.hfcpvp.functions.playerfixer.PlayerFixer;
+import ml.heartfulcpvp.hfcpvp.mixin.MixinManager;
+import ml.heartfulcpvp.hfcpvp.mixin.mixins.MixinEntityLiving;
 import ml.heartfulcpvp.hfcpvp.modules.ModuleManager;
 import ml.heartfulcpvp.hfcpvp.playerdata.PlayerDataUtils;
 import org.bukkit.Bukkit;
@@ -19,8 +23,10 @@ public class Plugin extends JavaPlugin {
     private static ProtocolManager protocolManager;
     private static ModuleManager moduleManager;
     private static FunctionManager functionManager;
+    private static MixinManager mixinManager;
     private static SimpleCommandMap commandMap;
     private static Plugin instanse;
+    private static MixinPlugin mixinPlugin;
 
     @Override
     public void onEnable() {
@@ -32,6 +38,9 @@ public class Plugin extends JavaPlugin {
         moduleManager = new ModuleManager();
         functionManager = new FunctionManager();
         instanse = this;
+
+        mixinPlugin = MixBukkit.registerMixinPlugin(this, AutoMapper.getMappingAsStream());
+        mixinManager = new MixinManager();
     }
 
     @Override
@@ -67,11 +76,31 @@ public class Plugin extends JavaPlugin {
         }
     }
 
+    public void loadMixins() {
+        new MixinEntityLiving();
+    }
+
     public static SimpleCommandMap getCommandMap() {
         return commandMap;
     }
 
     public static Plugin getInstance() {
         return instanse;
+    }
+
+    public static MixinPlugin getMixinPlugin() {
+        return mixinPlugin;
+    }
+
+    public static ModuleManager getModuleManager() {
+        return moduleManager;
+    }
+
+    public static FunctionManager getFunctionManager() {
+        return functionManager;
+    }
+
+    public static MixinManager getMixinManager() {
+        return mixinManager;
     }
 }

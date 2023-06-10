@@ -30,6 +30,7 @@ repositories {
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url = 'https://oss.sonatype.org/content/repositories/central' }
     maven { url "https://repo.dmulloy2.net/repository/public/" }
+    maven { url = 'https://repo.skriptlang.org/releases' }
     maven {
         url 'https://libraries.minecraft.net/'
         metadataSources {
@@ -43,7 +44,8 @@ repositories {
 dependencies {
     implementation 'org.spigotmc:spigot:1.16.5-R0.1-SNAPSHOT'
     compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.8.0";
-
+    implementation files("libs/MixBukkit-1.0-SNAPSHOT.jar") // local jar
+    implementation 'com.github.SkriptLang:Skript:2.6.3'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }

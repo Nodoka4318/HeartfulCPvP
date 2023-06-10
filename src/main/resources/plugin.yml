@@ -3,7 +3,7 @@ version: 1.0 # the plugin's version
 author: Nodoka4318
 main: ml.heartfulcpvp.hfcpvp.Plugin
 api-version:
-depend: [ProtocolLib]
+depend: [ProtocolLib, MixBukkit, Skript]
 
 # commands:
 #   autocrystal:
