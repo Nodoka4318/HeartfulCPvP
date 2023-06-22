@@ -11,7 +11,7 @@ public class MixinManager {
     public MixinManager() {
         mixins = new ArrayList<>();
 
-        mixins.add(new MixinEntityLiving());
+        // mixins.add(new MixinEntityLiving());
 
         mixin();
     }
